@@ -12,8 +12,10 @@ public class Word {
 	@Scheduled(fixedRate = 60000)
 	public void getNewWord() {
 		RestTemplate restTemplate = new RestTemplate();
-		word = restTemplate.getForObject("https://random-word-api.herokuapp.com/word?number=1", String.class);
-		System.out.println(word);
+		String response = restTemplate.getForObject("https://random-word-api.herokuapp.com/word?number=1", String.class);
+		response = response.substring(2, response.length()-2);
+		word = response;
+		System.out.println(response);
 	}
 
 	public static String getWord() {
