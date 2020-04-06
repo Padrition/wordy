@@ -10,5 +10,7 @@ public class WordyApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WordyApplication.class, args);
+		Word word = new Word();
+		word.getMeaning("perhaps");
 	}
 }
