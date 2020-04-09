@@ -27,10 +27,14 @@ public class Word {
 //https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200406T111623Z.f814b4f9ba53b645.8bb93540ea96927b7e6c411a4b7f808b6501de19&lang=en-en&text=
 	public String getMeaning(String term) throws IOException{
 		ObjectMapper mapper = new ObjectMapper();
-		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/time");
+		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/hello");
 		MeaningEntity[] empMap = mapper.readValue(www, MeaningEntity[].class);
 		for(MeaningEntity entity : empMap) {
-			System.out.println(entity.getWord());
+			System.out.println("------------------------------------");
+			System.out.println("Word		:	"+entity.getWord() +"\nOrigin		:	"+entity.getOrigin()+"\nPhonetic		:"+entity.getPhonetic());
+			System.out.println("Meaning		:");
+			System.out.println("			noun	:" + entity.getMeaning().getNoun());
+			System.out.println("			verb	:" + entity.getMeaning().getVerb());
 		}
 		return "";
 	}

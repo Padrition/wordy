@@ -1,7 +1,6 @@
 package com.padrition.wordy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MeaningEntity {
 
@@ -10,6 +9,8 @@ public class MeaningEntity {
 	private String phonetic;
 	
 	private String origin;
+	
+	private Meaning meaning;
 	
 	public MeaningEntity() {}
 
@@ -37,5 +38,12 @@ public class MeaningEntity {
 		this.origin = origin;
 	}
 	
+	public Meaning getMeaning() {
+		return this.meaning;
+	}
 	
+	public void setMeaning(Meaning meaning) {
+		this.meaning = meaning;
+	}
 }
+
