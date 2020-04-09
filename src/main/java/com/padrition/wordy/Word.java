@@ -2,14 +2,16 @@ package com.padrition.wordy;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.padrition.wordy.entities.Adverb;
 import com.padrition.wordy.entities.MeaningEntity;
+import com.padrition.wordy.entities.Noun;
+import com.padrition.wordy.entities.Verb;
 
 @Component
 public class Word {
@@ -23,20 +25,30 @@ public class Word {
 		response = response.substring(2, response.length()-2);
 		word = response;
 	}
-//https://dictionaryapi.com/api/v3/references/learners/json/test?key=6699457a-3204-49c5-85ed-d473b972968e
-//https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200406T111623Z.f814b4f9ba53b645.8bb93540ea96927b7e6c411a4b7f808b6501de19&lang=en-en&text=
-	public String getMeaning(String term) throws IOException{
+
+	public String getDefinition(String term) throws IOException{
+		String response = "";
 		ObjectMapper mapper = new ObjectMapper();
-		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/hello");
+		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/"+term);
 		MeaningEntity[] empMap = mapper.readValue(www, MeaningEntity[].class);
 		for(MeaningEntity entity : empMap) {
-			System.out.println("------------------------------------");
-			System.out.println("Word		:	"+entity.getWord() +"\nOrigin		:	"+entity.getOrigin()+"\nPhonetic		:"+entity.getPhonetic());
-			System.out.println("Meaning		:");
-			System.out.println("			noun	:" + entity.getMeaning().getNoun());
-			System.out.println("			verb	:" + entity.getMeaning().getVerb());
+			if(entity.getMeaning().getNoun() != null) {
+				for(Noun noun : entity.getMeaning().getNoun()) {
+					response += "\n[noun]	: " + noun.getDefinition();
+				}
+			}
+			if(entity.getMeaning().getVerb() != null) {
+				for(Verb verb : entity.getMeaning().getVerb()) {
+					response += "\n[verb]	: " + verb.getDefinition();
+				}
+			}
+			if(entity.getMeaning().getAdverb() != null) {
+				for(Adverb adverb : entity.getMeaning().getAdverb()) {
+					response += "\n[adverb] : " + adverb.getDefinition();
+				}
+			}
 		}
-		return "";
+		return response;
 	}
 	
 	public static String getWord() {

@@ -5,7 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Verb{
+public class Adverb {
 	
 	private String definition;
 
@@ -13,7 +13,7 @@ public class Verb{
 	
 	private List<String> synonyms;
 	
-	public Verb() {}
+	public Adverb() {}
 
 	public String getDefinition() {
 		return definition;
@@ -41,8 +41,7 @@ public class Verb{
 
 	@Override
 	public String toString() {
-		return "Verb [definition=" + definition + ", example=" + example + ", synonyms=" + synonyms + "]";
+		return "Adverb [definition=" + definition + ", example=" + example + ", synonyms=" + synonyms + "]";
 	}
 	
 }
-

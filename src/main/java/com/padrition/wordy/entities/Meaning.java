@@ -11,6 +11,8 @@ public class Meaning{
 	
 	private List<Verb> verb;
 	
+	private List<Adverb> adverb;
+	
 	public Meaning () {}
 
 	public List<Noun> getNoun() {
@@ -27,6 +29,14 @@ public class Meaning{
 
 	public void setVerb(List<Verb> verb) {
 		this.verb = verb;
+	}
+
+	public List<Adverb> getAdverb() {
+		return adverb;
+	}
+
+	public void setAdverb(List<Adverb> adverb) {
+		this.adverb = adverb;
 	}
 	
 }
