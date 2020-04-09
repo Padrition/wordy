@@ -1,6 +1,8 @@
 package com.padrition.wordy;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Map;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -8,11 +10,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.padrition.wordy.entities.MeaningEntity;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-//import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 @Component
 public class Word {
@@ -26,26 +23,14 @@ public class Word {
 		response = response.substring(2, response.length()-2);
 		word = response;
 	}
-
-	public String getMeaning(String term) {
-		OkHttpClient client = new OkHttpClient();
-
-		Request request = new Request.Builder()
-			.url("https://dictionary.yandex.net/api/v1/dicservice.json/lookup?"+
-					"key=dict.1.1.20200406T111623Z.f814b4f9ba53b645.8bb93540ea96927b7e6c411a4b7f808b6501de19&"+
-					"lang=en-en&text=" + term)
-			.build();
-		try {
-			//dict.1.1.20200406T111623Z.f814b4f9ba53b645.8bb93540ea96927b7e6c411a4b7f808b6501de19  key
-			//https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=APIkey&lang=en-en&text=time json request
-
-			ObjectMapper mapper = new ObjectMapper();
-			ResponseBody response = client.newCall(request).execute().body();
-			MeaningEntity entity = mapper.readValue(response.string(), MeaningEntity.class);
-			System.out.println(entity + "|"+entity.toString());
-			System.out.println(response.string());
-		}catch(IOException e){
-			System.out.println(e);
+//https://dictionaryapi.com/api/v3/references/learners/json/test?key=6699457a-3204-49c5-85ed-d473b972968e
+//https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20200406T111623Z.f814b4f9ba53b645.8bb93540ea96927b7e6c411a4b7f808b6501de19&lang=en-en&text=
+	public String getMeaning(String term) throws IOException{
+		ObjectMapper mapper = new ObjectMapper();
+		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/time");
+		MeaningEntity[] empMap = mapper.readValue(www, MeaningEntity[].class);
+		for(MeaningEntity entity : empMap) {
+			System.out.println(entity.getWord());
 		}
 		return "";
 	}

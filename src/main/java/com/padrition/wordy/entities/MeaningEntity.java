@@ -2,23 +2,39 @@ package com.padrition.wordy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MeaningEntity {
-	public String head;
+
+	private String word;
+	
+	private String phonetic;
+	
+	private String origin;
 	
 	public MeaningEntity() {}
 
-	public String getMean() {
-		return head;
+	public String getWord() {
+		return word;
 	}
 
-	public void setMean(String mean) {
-		this.head = mean;
+	public void setWord(String word) {
+		this.word = word;
 	}
 
-	@Override
-	public String toString() {
-		return "MeaningEntity [meaning=" + head + "]";
+	public String getPhonetic() {
+		return phonetic;
+	}
+
+	public void setPhonetic(String phonetic) {
+		this.phonetic = phonetic;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
 	}
 	
 	
