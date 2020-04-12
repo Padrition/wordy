@@ -5,22 +5,33 @@ import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.padrition.wordy.Word;
+import com.padrition.wordy.entities.SearchWord;
 
 @Controller
 public class WordyController {
 	
 	Word word = new Word();
 	
-	@GetMapping("/")
-	public String getHome(Model model) throws IOException {
-		String dailyWord = Word.getWord();
+	@ModelAttribute
+	public void addAttribute(Model model) throws IOException{
+		String dailyWord = Word.getDailyWord();
 		model.addAttribute("dailyWord" , dailyWord);
 		model.addAttribute("definition", word.getDefinition(dailyWord));
-		System.out.println("::dailyWord - " + dailyWord);
-		System.out.println("::full definition - " + word.getDefinition(dailyWord));
+	}
+	
+	@GetMapping("/")
+	public String getHome(Model model){
+		model.addAttribute("search", new SearchWord());
 		return "home";
 	}
 	
+	@PostMapping("/search")
+	public String search(@ModelAttribute("search") SearchWord searchWord , Model model) throws IOException{
+		model.addAttribute("searchWordDefinition", word.getDefinition(searchWord.getWord()));
+		return "homedef";
+	}
 }

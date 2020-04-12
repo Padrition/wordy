@@ -16,14 +16,14 @@ import com.padrition.wordy.entities.Verb;
 @Component
 public class Word {
 	
-	public static String word;
+	private static String dailyWord;
 	
 	@Scheduled(fixedRate = 60000) // change to 24 hours length when done
 	public void getNewWord() {
 		RestTemplate restTemplate = new RestTemplate();
 		String response = restTemplate.getForObject("https://random-word-api.herokuapp.com/word?number=1", String.class);
 		response = response.substring(2, response.length()-2);
-		word = response;
+		dailyWord = response;
 	}
 
 	public String getDefinition(String term) throws IOException{
@@ -51,12 +51,12 @@ public class Word {
 		return response;
 	}
 	
-	public static String getWord() {
-		return word;
+	public static String getDailyWord() {
+		return dailyWord;
 	}
 
-	public static void setWord(String word) {
-		Word.word = word;
+	public static void setDailyWord(String word) {
+		Word.dailyWord = word;
 	}
 	
 }
