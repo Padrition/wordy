@@ -2,6 +2,8 @@ package com.padrition.wordy;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -26,25 +28,29 @@ public class Word {
 		dailyWord = response;
 	}
 
-	public String getDefinition(String term) throws IOException{
-		String response = "";
+	public List<String> getDefinition(String term) throws IOException{
+//		String response = "";
+		List<String> response = new ArrayList<String>();
 		ObjectMapper mapper = new ObjectMapper();
 		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/"+term);
 		MeaningEntity[] empMap = mapper.readValue(www, MeaningEntity[].class);
 		for(MeaningEntity entity : empMap) {
 			if(entity.getMeaning().getNoun() != null) {
 				for(Noun noun : entity.getMeaning().getNoun()) {
-					response += "\n[noun]	: " + noun.getDefinition();
+//					response += "\n[noun]	: " + noun.getDefinition();
+					response.add("[noun]"+noun.getDefinition());
 				}
 			}
 			if(entity.getMeaning().getVerb() != null) {
 				for(Verb verb : entity.getMeaning().getVerb()) {
-					response += "\n[verb]	: " + verb.getDefinition();
+//					response += "\n[verb]	: " + verb.getDefinition();
+					response.add("[verb]"+verb.getDefinition());
 				}
 			}
 			if(entity.getMeaning().getAdverb() != null) {
 				for(Adverb adverb : entity.getMeaning().getAdverb()) {
-					response += "\n[adverb] : " + adverb.getDefinition();
+//					response += "\n[adverb] : " + adverb.getDefinition();
+					response.add("[adverb]"+adverb.getDefinition());
 				}
 			}
 		}

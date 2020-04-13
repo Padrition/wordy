@@ -6,12 +6,20 @@
 	</head>
 	<body>
 		<h2 th:text="${dailyWord}">Word</h2>
-		<p th:text="${definition}">definition</p>
+		<table>
+			<tr th:each="def : ${definition}">
+				<td th:text="${def}">definition</td>
+			</tr>
+		</table>
 		<form th:action="@{/search}" th:object="${search}" method="post">
 			<input type="text" th:field="*{word}"/>
 			<input type="submit"/>
 		</form>
 		<h1 th:text="${search.word}">searched word</h1>
-		<p th:text="${searchWordDefinition}">definition of the searched word</p>
+		<table>
+			<tr th:each="def : ${searchWordDefinition}">
+				<td th:text="${def}">definition</td>
+			</tr>
+		</table>
 	</body>
 </html>
