@@ -20,10 +20,16 @@ public class WordyController {
 	public void addAttribute(Model model){
 		try {
 			String dailyWord = Word.getDailyWord();
-			model.addAttribute("dailyWord" , dailyWord);
-			model.addAttribute("definition", word.getDefinition(dailyWord));
+			if(word.getDefinition(dailyWord).isEmpty()) {
+				System.out.println(":::\tdefinition not found in com.padrition.wordy.controller.WordyController.addAttribute() ");
+				Word.getNewWord();
+				addAttribute(model);
+			}else {
+				model.addAttribute("dailyWord" , dailyWord);
+				model.addAttribute("definition", word.getDefinition(dailyWord));
+			}
 		}catch(IOException e) {
-			System.out.println(":::		"+e+ " occured in " + this.getClass());
+			System.out.println(":::\t"+e+ " occured in " + this.getClass());
 			Word.getNewWord();
 			addAttribute(model);
 		}
