@@ -20,7 +20,7 @@ public class Word {
 	
 	private static String dailyWord;
 	
-	@Scheduled(fixedRate = 60000) // change to 24 hours length when done
+	@Scheduled(fixedRate = 5000) // change to 24 hours length when done
 	public static void getNewWord() {
 		RestTemplate restTemplate = new RestTemplate();
 		String response = restTemplate.getForObject("https://random-word-api.herokuapp.com/word?number=1", String.class);
@@ -36,17 +36,23 @@ public class Word {
 		for(MeaningEntity entity : empMap) {
 			if(entity.getMeaning().getNoun() != null) {
 				for(Noun noun : entity.getMeaning().getNoun()) {
-					response.add("[noun]"+noun.getDefinition());
+					if((noun.getDefinition() != null)&&(noun.getDefinition() != "null") ) {
+						response.add("[noun]"+noun.getDefinition());
+					}
 				}
 			}
 			if(entity.getMeaning().getVerb() != null) {
 				for(Verb verb : entity.getMeaning().getVerb()) {
-					response.add("[verb]"+verb.getDefinition());
+					if((verb.getDefinition() != null)&&(verb.getDefinition() != "null")) {
+						response.add("[verb]"+verb.getDefinition());
+					}
 				}
 			}
 			if(entity.getMeaning().getAdverb() != null) {
 				for(Adverb adverb : entity.getMeaning().getAdverb()) {
-					response.add("[adverb]"+adverb.getDefinition());
+					if((adverb.getDefinition() != null)&&(adverb.getDefinition() != "null")) {
+						response.add("[adverb]"+adverb.getDefinition());
+					}
 				}
 			}
 		}
