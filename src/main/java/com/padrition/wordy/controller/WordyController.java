@@ -17,10 +17,16 @@ public class WordyController {
 	Word word = new Word();
 	
 	@ModelAttribute
-	public void addAttribute(Model model) throws IOException{
-		String dailyWord = Word.getDailyWord();
-		model.addAttribute("dailyWord" , dailyWord);
-		model.addAttribute("definition", word.getDefinition(dailyWord));
+	public void addAttribute(Model model){
+		try {
+			String dailyWord = Word.getDailyWord();
+			model.addAttribute("dailyWord" , dailyWord);
+			model.addAttribute("definition", word.getDefinition(dailyWord));
+		}catch(IOException e) {
+			System.out.println(":::		"+e+ " occured in " + this.getClass());
+			Word.getNewWord();
+			addAttribute(model);
+		}
 	}
 	
 	@GetMapping("/")
