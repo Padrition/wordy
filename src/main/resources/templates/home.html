@@ -15,5 +15,11 @@
 			<input type="text" th:field="*{word}"/>
 			<input type="submit"/>
 		</form>
+		<h1 th:text="${search.word}">searched word</h1>
+		<table>
+			<tr th:each="def : ${searchWordDefinition}">
+				<td th:text="${def}">definition</td>
+			</tr>
+		</table>
 	</body>
 </html>

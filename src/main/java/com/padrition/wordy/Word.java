@@ -20,7 +20,7 @@ public class Word {
 	
 	private static String dailyWord;
 	
-	@Scheduled(fixedRate = 5000) // change to 24 hours length when done
+	@Scheduled(fixedRate = 86400000)
 	public static void getNewWord() {
 		RestTemplate restTemplate = new RestTemplate();
 		String response = restTemplate.getForObject("https://random-word-api.herokuapp.com/word?number=1", String.class);
