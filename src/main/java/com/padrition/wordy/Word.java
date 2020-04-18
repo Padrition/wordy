@@ -28,7 +28,7 @@ public class Word {
 		dailyWord = response;
 	}
 
-	public List<String> getDefinition(String term) throws IOException{
+	public List<String> getDefinitions(String term) throws IOException{
 		List<String> response = new ArrayList<String>();
 		ObjectMapper mapper = new ObjectMapper();
 		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/"+term);
@@ -59,12 +59,12 @@ public class Word {
 		return response;
 	}
 	
-	public static String getDailyWord() {
+	public String getDailyWord() {
 		return dailyWord;
 	}
 
-	public static void setDailyWord(String word) {
-		Word.dailyWord = word;
+	public void setDailyWord(String word) {
+		dailyWord = word;
 	}
 	
 }

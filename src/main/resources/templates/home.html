@@ -3,8 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Wordy</title>
+		<!-- <script type="text/javascript" th:src="@{js/script.js}"></script> -->
 	</head>
 	<body>
+		<h2 id="demo">TEXT</h2>
 		<h2 th:text="${dailyWord}">Word</h2>
 		<table>
 			<tr th:each="def : ${definition}">
@@ -21,5 +23,9 @@
 				<td th:text="${def}">definition</td>
 			</tr>
 		</table>
+		<script th:inline="javascript">
+			var myDef = [[${searchWordDefinition}]];
+			console.log(myDef);
+		</script>
 	</body>
 </html>
