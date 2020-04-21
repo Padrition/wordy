@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +19,10 @@ public class WordyRestController {
 	@Autowired
 	Word word;
 	
-	@PostMapping("/api/search")
-	public @ResponseBody ResponseEntity<?> search(@ModelAttribute("search") SearchWord searchWord) throws IOException{
+	@GetMapping("/api/search/{term}")
+	public @ResponseBody ResponseEntity<?> search(@PathVariable("term") String term) throws IOException{
+		SearchWord searchWord = new SearchWord();
+		searchWord.setWord(term);
 		Result result = new Result(word.getDefinitions(searchWord.getWord()));
 		return ResponseEntity.ok(result);
 	}

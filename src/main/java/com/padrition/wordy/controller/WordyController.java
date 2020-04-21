@@ -43,7 +43,7 @@ public class WordyController {
 		return "home";
 	}
 	
-	@PostMapping("/search" )
+	@PostMapping("/search")
 	public String search(@ModelAttribute("search") SearchWord searchWord , Model model) throws IOException{
 		model.addAttribute("searchWordDefinition", word.getDefinitions(searchWord.getWord()));
 		return "home";

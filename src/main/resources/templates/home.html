@@ -3,29 +3,44 @@
       xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Wordy</title>
-		<!-- <script type="text/javascript" th:src="@{js/script.js}"></script> -->
 	</head>
 	<body>
-		<h2 id="demo">TEXT</h2>
+	
+		<h2 id="demo1"></h2>
+		
 		<h2 th:text="${dailyWord}">Word</h2>
 		<table>
 			<tr th:each="def : ${definition}">
 				<td th:text="${def}">definition</td>
 			</tr>
 		</table>
-		<form th:action="@{/search}" th:object="${search}" method="post">
-			<input type="text" th:field="*{word}"/>
-			<input type="submit"/>
+		
+		
+		<form id="search-form">
+			<input type="text" id="word"/>
+			<button type="submit" id="btn-search">Submit</button>
 		</form>
+		
+		
+		<div id="feedback"></div>
+		
+		
+		<h4 id="noun"></h4>
+		<h4 id="verb"></h4>
+		<h4 id="adverb"></h4>
+		
+		
 		<h1 th:text="${search.word}">searched word</h1>
 		<table>
 			<tr th:each="def : ${searchWordDefinition}">
 				<td th:text="${def}">definition</td>
 			</tr>
 		</table>
-		<script th:inline="javascript">
-			var myDef = [[${searchWordDefinition}]];
-			console.log(myDef);
-		</script>
+		
+		
+		<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+		<script type="text/javascript" th:src="@{js/main.js}"></script>
 	</body>
 </html>
