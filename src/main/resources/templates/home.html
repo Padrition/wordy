@@ -5,8 +5,6 @@
 		<title>Wordy</title>
 	</head>
 	<body>
-	
-		<h2 id="demo1"></h2>
 		
 		<h2 th:text="${dailyWord}">Word</h2>
 		<table>
@@ -21,23 +19,14 @@
 			<button type="submit" id="btn-search">Submit</button>
 		</form>
 		
-		
-		<div id="feedback"></div>
-		
-		
-		<h4 id="noun"></h4>
-		<h4 id="verb"></h4>
-		<h4 id="adverb"></h4>
-		
-		
-		<h1 th:text="${search.word}">searched word</h1>
-		<table>
-			<tr th:each="def : ${searchWordDefinition}">
-				<td th:text="${def}">definition</td>
-			</tr>
-		</table>
-		
-		
+		<h2 id="searched-Word"></h2>
+		<div id="definition">
+			<div id="noun"></div>
+			<div id="verb"></div>
+			<div id="adverb"></div>
+		</div>
+
+
 		<script type="text/javascript"
         src="webjars/jquery/2.2.4/jquery.min.js"></script>
 
