@@ -28,12 +28,12 @@ public class Word {
 		dailyWord = response;
 	}
 
-	public List<String> getDefinitions(String term) throws IOException{
+	public List<String> getDailyWordDefitions(String term)throws IOException{
 		List<String> response = new ArrayList<String>();
 		ObjectMapper mapper = new ObjectMapper();
 		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/"+term);
-		MeaningEntity[] empMap = mapper.readValue(www, MeaningEntity[].class);
-		for(MeaningEntity entity : empMap) {
+		MeaningEntity[] entMap = mapper.readValue(www, MeaningEntity[].class);
+		for(MeaningEntity entity : entMap) {
 			if(entity.getMeaning().getNoun() != null) {
 				for(Noun noun : entity.getMeaning().getNoun()) {
 					if((noun.getDefinition() != null)&&(noun.getDefinition() != "null") ) {
@@ -54,6 +54,25 @@ public class Word {
 						response.add("[adverb]"+adverb.getDefinition());
 					}
 				}
+			}
+		}
+		return response;
+	}
+
+	public MeaningEntity getDefinitions(String term) throws IOException{
+		MeaningEntity response = new MeaningEntity();
+		ObjectMapper mapper = new ObjectMapper();
+		URL www = new URL("https://api.dictionaryapi.dev/api/v1/entries/en/"+term);
+		MeaningEntity[] entMap = mapper.readValue(www, MeaningEntity[].class);
+		for(MeaningEntity entity : entMap){
+			if(response.getWord()==null){
+				response.setWord(entity.getWord());
+			}
+			if(response.getPhonetic()==null){
+				response.setPhonetic(entity.getPhonetic());
+			}
+			if(response.getMeaning()==null){
+				response.setMeaning(entity.getMeaning());
 			}
 		}
 		return response;

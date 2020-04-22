@@ -22,13 +22,13 @@ public class WordyController {
 	public void addAttribute(Model model){
 		try {
 			String dailyWord = word.getDailyWord();
-			if(word.getDefinitions(dailyWord).isEmpty()) {
+			if(word.getDailyWordDefitions(dailyWord).isEmpty()) {
 				System.out.println(":::\tdefinition not found in com.padrition.wordy.controller.WordyController.addAttribute() ");
 				Word.getNewWord();
 				addAttribute(model);
 			}else {
 				model.addAttribute("dailyWord" , dailyWord);
-				model.addAttribute("definition", word.getDefinitions(dailyWord));
+				model.addAttribute("definition", word.getDailyWordDefitions(dailyWord));
 			}
 		}catch(IOException e) {
 			System.out.println(":::\t"+e+ " occured in " + this.getClass());
