@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.padrition.wordy.entities.Adverb;
 import com.padrition.wordy.entities.MeaningEntity;
 import com.padrition.wordy.entities.Noun;
+import com.padrition.wordy.entities.TransitiveVerb;
 import com.padrition.wordy.entities.Verb;
 
 @Component
@@ -36,22 +37,29 @@ public class Word {
 		for(MeaningEntity entity : entMap) {
 			if(entity.getMeaning().getNoun() != null) {
 				for(Noun noun : entity.getMeaning().getNoun()) {
-					if((noun.getDefinition() != null)&&(noun.getDefinition() != "null") ) {
+					if(noun.getDefinition() != null){
 						response.add("[noun]"+noun.getDefinition());
 					}
 				}
 			}
 			if(entity.getMeaning().getVerb() != null) {
 				for(Verb verb : entity.getMeaning().getVerb()) {
-					if((verb.getDefinition() != null)&&(verb.getDefinition() != "null")) {
+					if(verb.getDefinition() != null){
 						response.add("[verb]"+verb.getDefinition());
 					}
 				}
 			}
 			if(entity.getMeaning().getAdverb() != null) {
 				for(Adverb adverb : entity.getMeaning().getAdverb()) {
-					if((adverb.getDefinition() != null)&&(adverb.getDefinition() != "null")) {
+					if(adverb.getDefinition() != null){
 						response.add("[adverb]"+adverb.getDefinition());
+					}
+				}
+			}
+			if(entity.getMeaning().getTransitiveVerb() != null){
+				for(TransitiveVerb transitiveVerb : entity.getMeaning().getTransitiveVerb()){
+					if(transitiveVerb.getDefinition() != null){
+						response.add("[transitive verb]"+transitiveVerb.getDefinition());
 					}
 				}
 			}

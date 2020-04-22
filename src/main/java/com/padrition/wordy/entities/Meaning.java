@@ -12,6 +12,8 @@ public class Meaning{
 	private List<Verb> verb;
 	
 	private List<Adverb> adverb;
+
+	private List<TransitiveVerb> transitiveVerb;
 	
 	public Meaning () {}
 
@@ -37,6 +39,14 @@ public class Meaning{
 
 	public void setAdverb(List<Adverb> adverb) {
 		this.adverb = adverb;
+	}
+
+	public List<TransitiveVerb> getTransitiveVerb() {
+		return transitiveVerb;
+	}
+
+	public void setTransitiveVerb(List<TransitiveVerb> transitiveVerb) {
+		this.transitiveVerb = transitiveVerb;
 	}
 	
 }
