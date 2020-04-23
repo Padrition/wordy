@@ -10,9 +10,9 @@ public class TransitiveVerb {
 
 	private String example;
     
-    public TransitiveVerb(){}
-    
     private List<String> synonyms;
+
+    public TransitiveVerb(){}
 
     public String getDefinition() {
         return definition;

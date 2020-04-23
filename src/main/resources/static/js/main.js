@@ -7,35 +7,49 @@ $(document).ready(function() {
 });
 
 function fire_ajax_submit(){
-	$("#definition").html("");
+	$("#definition #noun").html("");
+	$("#definition #verb").html("");
+	$("#definition #adverb").html("");
+	$("#definition #transitiveVerb").html("");
+
 	var term = $("#word").val();
 	$.ajax({
 		type : "GET",
 		datatype : "json",
 		url : "/api/search/" + term, 
 		success : function(data) {
+			
 			console.log(data);
+
 			$("#searched-Word").html(data.word);
-			console.log(data.meaning.noun);
+			$("#phonetic").html("["+data.phonetic+"]");
+
 			if(data.meaning.noun !== null){
-				$("#definition").append("<p>[noun]</p>");
-				$("#definition").append("<ul></ul>");
+				$("#noun").append("<p>[noun]</p>");
+				$("#noun").append("<ul></ul>");
 				$.each(data.meaning.noun , function(i){
-					$("#definition").append("<li>"+data.meaning.noun[i].definition+"</li>");
+					$("#noun ul").append("<li>"+data.meaning.noun[i].definition+"</li>");
 				});
 			}
 			if(data.meaning.verb !== null){
-				$("#definition").append("<p>[verb]</p>");
-				$("#definition").append("<ul></ul>");
+				$("#verb").append("<p>[verb]</p>");
+				$("#verb").append("<ul></ul>");
 				$.each(data.meaning.verb , function(i){
-					$("#definition").append("<li>"+data.meaning.verb[i].definition+"</li>");
+					$("#verb ul").append("<li>"+data.meaning.verb[i].definition+"</li>");
 				});
 			}
 			if(data.meaning.adverb !== null){
-				$("#definition").append("<p>[adverb]</p>");
-				$("#definition").append("<ul></ul>");
+				$("#adverb").append("<p>[adverb]</p>");
+				$("#adverb").append("<ul></ul>");
 				$.each(data.meaning.adverb , function(i){
-					$("#definition").append("<li>"+data.meaning.adverb[i].definition+"</li>");
+					$("#adverb ul").append("<li>"+data.meaning.adverb[i].definition+"</li>");
+				});
+			}
+			if(data.meaning["transitive verb"] !== null){
+				$("#transitiveVerb").append("<p>[transitive verb]</p>");
+				$("#transitiveVerb").append("<ul></ul>");
+				$.each(data.meaning["transitive verb"] , function(i){
+					$("#transitiveVerb ul").append("<li>"+data.meaning["transitive verb"][i].definition+"</li>");
 				});
 			}
 		},

@@ -3,12 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Wordy</title>
+		<link rel="stylesheet" th:href="@{/style/style.css}">
 	</head>
 	<body>
 		
-		<h2 th:text="${dailyWord}">Word</h2>
+		<h1 th:text="${dailyWord}">Word</h1>
+		<h3 th:text="${dailyWordPhonetic}">phonetic</h3>
 		<table>
-			<tr th:each="def : ${definition}">
+			<tr th:each="def : ${dailtyWordDefinition}">
 				<td th:text="${def}">definition</td>
 			</tr>
 		</table>
@@ -20,10 +22,12 @@
 		</form>
 		
 		<h2 id="searched-Word"></h2>
+		<h4 id="phonetic"></h4>
 		<div id="definition">
 			<div id="noun"></div>
 			<div id="verb"></div>
 			<div id="adverb"></div>
+			<div id="transitiveVerb"></div>
 		</div>
 
 

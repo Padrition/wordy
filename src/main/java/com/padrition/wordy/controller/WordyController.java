@@ -28,7 +28,8 @@ public class WordyController {
 				addAttribute(model);
 			}else {
 				model.addAttribute("dailyWord" , dailyWord);
-				model.addAttribute("definition", word.getDailyWordDefitions(dailyWord));
+				model.addAttribute("dailtyWordDefinition", word.getDailyWordDefitions(dailyWord));
+				model.addAttribute("dailyWordPhonetic" , word.getDefinitions(dailyWord).getPhonetic());
 			}
 		}catch(IOException e) {
 			System.out.println(":::\t"+e+ " occured in " + this.getClass());

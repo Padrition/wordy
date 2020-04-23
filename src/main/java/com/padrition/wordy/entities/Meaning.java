@@ -3,6 +3,7 @@ package com.padrition.wordy.entities;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Meaning{
@@ -12,7 +13,7 @@ public class Meaning{
 	private List<Verb> verb;
 	
 	private List<Adverb> adverb;
-
+	@JsonProperty("transitive verb")
 	private List<TransitiveVerb> transitiveVerb;
 	
 	public Meaning () {}
@@ -47,6 +48,12 @@ public class Meaning{
 
 	public void setTransitiveVerb(List<TransitiveVerb> transitiveVerb) {
 		this.transitiveVerb = transitiveVerb;
+	}
+
+	@Override
+	public String toString() {
+		return "Meaning [adverb=" + adverb + ", noun=" + noun + ", transitiveVerb=" + transitiveVerb + ", verb=" + verb
+				+ "]";
 	}
 	
 }
