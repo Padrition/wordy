@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Wordy</title>
-		<link rel="stylesheet" th:href="@{/style/style.css}">
+		<link rel="stylesheet" href="styles.css" type="text/css">
 	</head>
 	<body>
 		
@@ -21,9 +21,10 @@
 			<button type="submit" id="btn-search">Submit</button>
 		</form>
 		
-		<h2 id="searched-Word"></h2>
-		<h4 id="phonetic"></h4>
+		
 		<div id="definition">
+			<div id="searched-Word"></div>
+			<div id="phonetic"></div>
 			<div id="noun"></div>
 			<div id="verb"></div>
 			<div id="adverb"></div>

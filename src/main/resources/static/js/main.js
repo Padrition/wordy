@@ -11,6 +11,8 @@ function fire_ajax_submit(){
 	$("#definition #verb").html("");
 	$("#definition #adverb").html("");
 	$("#definition #transitiveVerb").html("");
+	$("#definition #searched-Word").html("");
+	$("#definition #phonetic").html("");
 
 	var term = $("#word").val();
 	$.ajax({
@@ -21,8 +23,8 @@ function fire_ajax_submit(){
 			
 			console.log(data);
 
-			$("#searched-Word").html(data.word);
-			$("#phonetic").html("["+data.phonetic+"]");
+			$("#searched-Word").append("<h2>"+data.word+"</h2>");
+			$("#phonetic").append("<h4>"+data.phonetic+"</h4>");
 
 			if(data.meaning.noun !== null){
 				$("#noun").append("<p>[noun]</p>");
