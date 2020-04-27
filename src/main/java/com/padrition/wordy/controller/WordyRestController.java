@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.padrition.wordy.Word;
+import com.padrition.wordy.entities.MeaningEntity;
 
 @RestController
 public class WordyRestController {
@@ -19,6 +20,12 @@ public class WordyRestController {
 	
 	@GetMapping("/api/search/{term}")
 	public @ResponseBody ResponseEntity<?> search(@PathVariable("term") String term) throws IOException{
-		return ResponseEntity.ok(word.getDefinitions(term));
+		MeaningEntity meaningEntity = new MeaningEntity();
+		meaningEntity = word.getDefinitions(term);
+		if(meaningEntity.getMeaning() == null){
+			return ResponseEntity.ok(null);
+		}else{
+			return ResponseEntity.ok(meaningEntity);
+		}
 	}
 }

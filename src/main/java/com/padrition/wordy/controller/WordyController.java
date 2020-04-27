@@ -7,10 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import com.padrition.wordy.Word;
-import com.padrition.wordy.entities.SearchWord;
 
 @Controller
 public class WordyController {
@@ -39,14 +37,7 @@ public class WordyController {
 	}
 	
 	@GetMapping("/")
-	public String getHome(Model model){
-		model.addAttribute("search", new SearchWord());
-		return "home";
-	}
-	
-	@PostMapping("/search")
-	public String search(@ModelAttribute("search") SearchWord searchWord , Model model) throws IOException{
-		model.addAttribute("searchWordDefinition", word.getDefinitions(searchWord.getWord()));
+	public String getHome(){
 		return "home";
 	}
 	
