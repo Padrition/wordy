@@ -13,6 +13,7 @@ function fire_ajax_submit(){
 	$("#definition #transitiveVerb").html("");
 	$("#definition #searched-Word").html("");
 	$("#definition #phonetic").html("");
+	$("#definition #abbreviation").html("");
 
 	var term = $("#word").val();
 	$.ajax({
@@ -53,6 +54,13 @@ function fire_ajax_submit(){
 				$.each(data.meaning["transitive verb"] , function(i){
 					$("#transitiveVerb ul").append("<li>"+data.meaning["transitive verb"][i].definition+"</li>");
 				});
+			}
+			if(data.meaning.abbreviation !== null){
+				$("#abbreviation").append("<p>[abbreviation]</p>");
+				$("#abbreviation").append("<ul></ul>");
+				$.each(data.meaning.abbreviation , function(i){
+					$("#abbreviation ul").append("<li>"+data.meaning.abbreviation[i].definition+"</li>")
+				})
 			}
 		},
 		error : function(){

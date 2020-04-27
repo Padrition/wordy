@@ -15,6 +15,8 @@ public class Meaning{
 	private List<Adverb> adverb;
 	@JsonProperty("transitive verb")
 	private List<TransitiveVerb> transitiveVerb;
+
+	private List<Abbreviation> abbreviation;
 	
 	public Meaning () {}
 
@@ -50,10 +52,17 @@ public class Meaning{
 		this.transitiveVerb = transitiveVerb;
 	}
 
+	public List<Abbreviation> getAbbreviation() {
+		return abbreviation;
+	}
+
+	public void setAbbreviation(List<Abbreviation> abbreviation) {
+		this.abbreviation = abbreviation;
+	}
+	
 	@Override
 	public String toString() {
 		return "Meaning [adverb=" + adverb + ", noun=" + noun + ", transitiveVerb=" + transitiveVerb + ", verb=" + verb
 				+ "]";
 	}
-	
 }
